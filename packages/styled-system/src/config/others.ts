@@ -1,8 +1,7 @@
 import * as CSS from "csstype"
-import { Config, PropConfig, createParser, system } from "../core"
+import { Config, createParser, PropConfig, system } from "../core"
 import { getIsRtl, Length, ResponsiveValue } from "../utils"
-import { PropsPath } from "../utils.types"
-import { ChakraTheme } from ".."
+import { ThemeTypings } from "../theming.types"
 
 const floatTransform: PropConfig["transform"] = (value, _, props = {}) => {
   const map = { left: "right", right: "left" }
@@ -27,7 +26,7 @@ const config: Config = {
   filter: true,
 }
 
-export interface OtherProps<Theme extends ChakraTheme = ChakraTheme> {
+export interface OtherProps<Theme extends ThemeTypings = ThemeTypings> {
   /**
    * The CSS `animation` property
    */
@@ -61,10 +60,10 @@ export interface OtherProps<Theme extends ChakraTheme = ChakraTheme> {
    */
   objectFit?: ResponsiveValue<CSS.Property.ObjectFit>
   /**
-   * The CSS `object-psition` property
+   * The CSS `object-position` property
    */
   objectPosition?: ResponsiveValue<
-    CSS.Property.ObjectPosition<Length> & PropsPath<Theme["sizes"]>
+    Theme["sizes"] | CSS.Property.ObjectPosition<Length>
   >
   /**
    * The CSS `float` property
